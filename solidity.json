@@ -1,0 +1,285 @@
+{
+	// Place your snippets for solidity here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	/**
+	* Imports
+	*/
+	"Import Test": {
+		"prefix": "importTest",
+		"body": [
+			"import {Test, console} from \"forge-std/Test.sol\";$0",
+		],
+		"description": "Import Test and console from \"forge-std\""
+	},
+	"Import console": {
+		"prefix": "importconsole",
+		"body": [
+			"import {console} from \"forge-std/console.sol\";$0",
+		],
+		"description": "Import console from \"forge-std\""
+	},
+	"Import Script": {
+		"prefix": "importScript",
+		"body": [
+			"import {Script} from \"forge-std/Script.sol\";$0",
+		],
+		"description": "Import Script from \"forge-std\""
+	},
+	"Import ERC20": {
+		"prefix": "importERC20",
+		"body": [
+			"import {ERC20} from \"@openzeppelin/contracts/token/ERC20/ERC20.sol\";$0",
+		],
+		"description": "Import ERC20 from \"OpenZeppelin/contracts\""
+	},
+	"Import Ownable": {
+		"prefix": "importOwnable",
+		"body": [
+			"import {Ownable} from \"@openzeppelin/contracts/access/Ownable.sol\";$0",
+		],
+		"description": "Import Ownable from \"OpenZeppelin/contracts\""
+	},
+	"Import DevOpsTools": {
+		"prefix": "importDevOpsTools",
+		"body": [
+			"import {DevOpsTools} from \"foundry-devops/src/DevOpsTools.sol\";$0",
+		],
+		"description": "Import DevOpsTools from \"foundry-devops\""
+	},
+	"address(this)": {
+		"prefix": "addr",
+		"body": [
+			"address(${1:this})$0"
+		],
+		"description": "Writes \"address(this)\", \"this\" being a variable."
+	},
+	/**
+	* vm cheatcodes
+	*/
+	"createWallet": {
+		"prefix": "vmcreatewallet",
+		"body": [
+			"Wallet memory wallet = vm.createWallet($1);$0"
+		],
+		"description": "Use the \"vm.createWallet()\" from foundry, returning a Wallet."
+	},
+	"sign": {
+		"prefix": "vmsign",
+		"body": [
+			"(uint8 v, bytes32 r, bytes32 s) = vm.sign(${1:pkOrWallet}, ${2:digest});$0"
+		],
+		"description": "Use the \"vm.sign()\" from foundry, returning v, r and s."
+	},
+	"get nonce": {
+		"prefix": "vmGetNonce",
+		"body": [
+			"uint256 nonce = vm.getNonce(${1:addressOrWallet});$0"
+		],
+		"description": "Use the \"vm.getNonce()\" from foundry, the nonce from the account."
+	},
+	"warp": {
+		"prefix": "vmwarp",
+		"body": [
+			"vm.warp(${1:block.timestamp + 1});$0"
+		],
+		"description": "Use the \"vm.warp()\" from foundry to set block.timestamp."
+	},
+	"roll": {
+		"prefix": "vmroll",
+		"body": [
+			"vm.roll(${1:block.number + 1});$0"
+		],
+		"description": "Use the \"vm.roll()\" from foundry to set block.number."
+	},
+	"fee": {
+		"prefix": "vmfee",
+		"body": [
+			"vm.fee(${1:1 wei});$0"
+		],
+		"description": "Use the \"vm.fee()\" from foundry to set block.basefee."
+	},
+	"difficulty": {
+		"prefix": "vmdifficulty",
+		"body": [
+			"vm.difficulty(${1:1});$0"
+		],
+		"description": "Use the \"vm.difficulty()\" from foundry to set block.difficulty."
+	},
+	"prevrandao": {
+		"prefix": "vmprevrandao",
+		"body": [
+			"vm.prevrandao(${1:bytes32(uint256(1))});$0"
+		],
+		"description": "Use the \"vm.prevrandao()\" from foundry to set block.prevrandao."
+	},
+	"chainid": {
+		"prefix": "vmchainid",
+		"body": [
+			"vm.chainid(${1:31337});$0"
+		],
+		"description": "Use the \"vm.chainid()\" from foundry to set block.chainid."
+	},
+	"load": {
+		"prefix": "vmload",
+		"body": [
+			"bytes32 leet = vm.load(${1:address(leetContract)}, ${2:bytes32(uint256(0))});$0"
+		],
+		"description": "Use the \"vm.load()\" from foundry to load the value from storage of a contract."
+	},
+	"store": {
+		"prefix": "vmstore",
+		"body": [
+			"vm.store(${1:address(leetContract)}, ${2:bytes32(uint256(0))}, ${3:bytes32(uint256(123456))});$0"
+		],
+		"description": "Use the \"vm.store()\" from foundry to store a value to the storage of a contract."
+	},
+	"startBroadcast": {
+		"prefix": "vmbroadcast",
+		"body": [
+			"vm.startBroadcast($1);",
+			"",
+			"$2",
+			"",
+			"vm.stopBroadcast();$0"
+		],
+		"description": "Use the \"vm.startBroadcast()\" and \"vm.stopBroadcast()\" from foundry."
+	},
+	"prank": {
+		"prefix": "vmprank",
+		"body": [
+			"vm.prank($1);$0"
+		],
+		"description": "Use \"vm.prank(user)\" from foundry, \"user\" being a variable."
+	},
+	"startPrank": {
+		"prefix": "vmsprank",
+		"body": [
+			"vm.startPrank($1);",
+			"",
+			"$2",
+			"",
+			"vm.stopPrank();$0"
+		],
+		"description": "Use \"vm.startPrank(user)\" and \"vm.stopPrank\" from foundry, \"user\" being a variable."
+	},
+	"deal": {
+		"prefix": "vmdeal",
+		"body": [
+			"vm.deal(${1:user}, ${2:1 ether});$0"
+		],
+		"description": "Use \"vm.deal(user, 1 ether)\" from foundry, \"user\" and \"1 ether\" being variables."
+	},
+	"expectEmit": {
+		"prefix": "vmrevert",
+		"body": [
+			"vm.expectEmit($1);$0"
+		],
+		"description": "Use \"vm.expectEmit(revertMessage)\" from foundry, \"revertMessage\" being an empty varible."
+	},
+	"expectRevert": {
+		"prefix": "vmrevert",
+		"body": [
+			"vm.expectRevert($1);$0"
+		],
+		"description": "Use \"vm.expectRevert(revertMessage)\" from foundry, \"revertMessage\" being an empty varible."
+	},
+	"assume": {
+		"prefix": "vmassume",
+		"body": [
+			"vm.assume($1);$0"
+		],
+		"description": "Use \"vm.assume()\" from foundry. Should prioritize \"bound\" for broad checks."
+	},
+	"bound": {
+		"prefix": "vmbound",
+		"body": [
+			"${1:value} = bound(${1:value}, ${2:min}, ${3:max});$0"
+		],
+		"description": "Use \"vm.bound()\" from foundry. Min & max values are included."
+	},
+	/**
+	* Misc
+	*/
+	"Print to console": {
+		"prefix": "clg",
+		"body": [
+			"console.log($1);$0"
+		],
+		"description": "Writes \"console.log(param);\""
+	},
+	"makeAddr": {
+		"prefix": "makeAddr",
+		"body": [
+			"address ${1:user} = makeAddr(\"${1:user}\");$0"
+		],
+		"description": "Writes \"makeAddr(user)\""
+	},
+	"getMostRecentlyDeployed": {
+		"prefix": "getMostRecentlyDeployed",
+		"body": [
+			"address mostRecentlyDeployed = DevOpsTools.get_most_recent_deployment(\"${1:contractName}\", block.chainid);$0"
+		],
+		"description": "Writes the \"getMostRecentlyDeployed\" function from \"DevOpsTools\""
+	},
+	"abi.encodePacked(\"encoding\")": {
+		"prefix": "abiEncodePacked",
+		"body": [
+			"abi.encodePacked(${1})$0"
+		],
+		"description": "Writes \"abi.encodePacked(param)\", param being an empty variable"
+	},
+	"assertEq(1, 2)": {
+		"prefix": "aseq",
+		"body": [
+			"assertEq(${1:true}, ${2:true});$0",
+		],
+		"description": "assertEq function for tests"
+	},
+	"Send eth": {
+		"prefix": "callEth",
+		"body": [
+			"(bool success,) = address(${1:addrName}).call{value: ${2:1 ether}}(\"\");",
+			"require(success);$0"
+		],
+		"description": "Writes the basic lines function to send eth to an address"
+	},
+	"Create a test file with every basic thing needed for test": {
+		"prefix": "forgeTestFile",
+		"body": [
+			"// SPDX-License-Identifier: MIT",
+			"pragma solidity ^0.8.20;",
+			"",
+			"import {Test, console} from \"forge-std/Test.sol\";",
+			"",
+			"contract ${1:contract}Test is Test {",
+			"    function setUp() public {$0}",
+			"}"
+		],
+		"description": "Creates the content of a file with a contract that inherits Test with a \"setUp\" function"
+	},
+	"Create a script deploy file with every basic thing needed for test": {
+		"prefix": "forgeDeployFile",
+		"body": [
+			"// SPDX-License-Identifier: MIT",
+			"pragma solidity ^0.8.20;",
+			"",
+			"import {Script, console} from \"forge-std/Script.sol\";",
+			"",
+			"contract ${1:contract}Deployer is Script {",
+			"    function run() public {$0}",
+			"}"
+		],
+		"description": "Creates the content of a file with a contract that inherits Script with a \"run\" function"
+	}
+}
