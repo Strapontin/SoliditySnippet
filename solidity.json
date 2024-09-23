@@ -36,6 +36,13 @@
 		],
 		"description": "Import Script from \"forge-std\""
 	},
+	"Import StdInvariant": {
+		"prefix": "importStdInvariant",
+		"body": [
+			"import {StdInvariant} from \"forge-std/StdInvariant.sol\";$0",
+		],
+		"description": "Import StdInvariant from \"forge-std\""
+	},
 	"Import ERC20": {
 		"prefix": "importERC20",
 		"body": [
@@ -181,7 +188,7 @@
 		"description": "Use \"vm.deal(user, 1 ether)\" from foundry, \"user\" and \"1 ether\" being variables."
 	},
 	"expectEmit": {
-		"prefix": "vmrevert",
+		"prefix": "vmemit",
 		"body": [
 			"vm.expectEmit($1);$0"
 		],
@@ -207,6 +214,20 @@
 			"${1:value} = bound(${1:value}, ${2:min}, ${3:max});$0"
 		],
 		"description": "Use \"vm.bound()\" from foundry. Min & max values are included."
+	},
+	"snapshot": {
+		"prefix": "vmsnapshot",
+		"body": [
+			"uint256 ${1:snapshot} = vm.snapshot();$0"
+		],
+		"description": "Use \"vm.snapshot()\" from foundry."
+	},
+	"revertTo": {
+		"prefix": "vmrevertTo",
+		"body": [
+			"vm.revertTo(${1:snapshot});$0"
+		],
+		"description": "Use \"vm.revertTo()\" from foundry."
 	},
 	/**
 	* Misc
@@ -281,5 +302,19 @@
 			"}"
 		],
 		"description": "Creates the content of a file with a contract that inherits Script with a \"run\" function"
+	},
+	"block.timestamp": {
+		"prefix": "blocktimestamp",
+		"body": [
+			"block.timestamp$0"
+		],
+		"description": "Writes \"block.timestamp\""
+	},
+	"block.number": {
+		"prefix": "blocknumber",
+		"body": [
+			"block.number$0"
+		],
+		"description": "Writes \"block.number\""
 	}
 }
