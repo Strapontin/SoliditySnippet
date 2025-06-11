@@ -18,16 +18,16 @@
 	"Import Test": {
 		"prefix": "importTest",
 		"body": [
-			"import {Test, console} from \"forge-std/Test.sol\";$0",
+			"import \"forge-std/Test.sol\";$0",
 		],
-		"description": "Import Test and console from \"forge-std\""
+		"description": "Import \"forge-std\""
 	},
-	"Import console": {
+	"Import console2": {
 		"prefix": "importconsole",
 		"body": [
-			"import {console} from \"forge-std/console.sol\";$0",
+			"import \"forge-std/console2.sol\";$0",
 		],
-		"description": "Import console from \"forge-std\""
+		"description": "Import console2 from \"forge-std\""
 	},
 	"Import Script": {
 		"prefix": "importScript",
@@ -64,12 +64,26 @@
 		],
 		"description": "Import DevOpsTools from \"foundry-devops\""
 	},
-	"address(this)": {
-		"prefix": "addr",
+	"Import CommonBase": {
+		"prefix": "importCommonBase",
 		"body": [
-			"address(${1:this})$0"
+			"import {CommonBase} from \"forge-std/Base.sol\";$0",
 		],
-		"description": "Writes \"address(this)\", \"this\" being a variable."
+		"description": "Import CommonBase from \"forge-std\""
+	},
+	"Import StdCheats": {
+		"prefix": "importStdCheats",
+		"body": [
+			"import {StdCheats} from \"forge-std/StdCheats.sol\";$0",
+		],
+		"description": "Import StdCheats from \"forge-std\""
+	},
+	"Import StdUtils": {
+		"prefix": "importStdUtils",
+		"body": [
+			"import {StdUtils} from \"forge-std/StdUtils.sol\";$0",
+		],
+		"description": "Import StdUtils from \"forge-std\""
 	},
 	/**
 	* vm cheatcodes
@@ -180,12 +194,18 @@
 		],
 		"description": "Use \"vm.startPrank(user)\" and \"vm.stopPrank\" from foundry, \"user\" being a variable."
 	},
-	"deal": {
+	"vmdeal": {
 		"prefix": "vmdeal",
 		"body": [
 			"vm.deal(${1:user}, ${2:1 ether});$0"
 		],
 		"description": "Use \"vm.deal(user, 1 ether)\" from foundry, \"user\" and \"1 ether\" being variables."
+	},
+	"dealERC20": {
+		"prefix": "deal",
+		"body": [
+			"deal(${1:token}, ${2:to}, ${3:1 ether});$0"
+		],
 	},
 	"expectEmit": {
 		"prefix": "vmemit",
@@ -211,9 +231,9 @@
 	"bound": {
 		"prefix": "vmbound",
 		"body": [
-			"${1:value} = bound(${1:value}, ${2:min}, ${3:max});$0"
+			"${1:value} = _bound(${1:value}, ${2:min}, ${3:max});$0"
 		],
-		"description": "Use \"vm.bound()\" from foundry. Min & max values are included."
+		"description": "Use \"_bound()\" from foundry. Min & max values are included."
 	},
 	"snapshot": {
 		"prefix": "vmsnapshot",
@@ -232,12 +252,19 @@
 	/**
 	* Misc
 	*/
+	"address(this)": {
+		"prefix": "addr",
+		"body": [
+			"address(${1:this})$0"
+		],
+		"description": "Writes \"address(this)\", \"this\" being a variable."
+	},
 	"Print to console": {
 		"prefix": "clg",
 		"body": [
-			"console.log($1);$0"
+			"console2.log($1);$0"
 		],
-		"description": "Writes \"console.log(param);\""
+		"description": "Writes \"console2.log(param);\""
 	},
 	"makeAddr": {
 		"prefix": "makeAddr",
@@ -254,11 +281,18 @@
 		"description": "Writes the \"getMostRecentlyDeployed\" function from \"DevOpsTools\""
 	},
 	"abi.encodePacked(\"encoding\")": {
-		"prefix": "abiEncodePacked",
+		"prefix": "encodePacked",
 		"body": [
 			"abi.encodePacked(${1})$0"
 		],
 		"description": "Writes \"abi.encodePacked(param)\", param being an empty variable"
+	},
+	"abi.encodeWithSignature(\"selector\", params)": {
+		"prefix": "encodeWithSignature",
+		"body": [
+			"bytes memory ${1:selector} = abi.encodeWithSignature(${2:selector}, ${3:params})$0"
+		],
+		"description": "Writes \"abi.encodeWithSignature(selector, params)\""
 	},
 	"assertEq(1, 2)": {
 		"prefix": "aseq",
@@ -266,6 +300,20 @@
 			"assertEq(${1:true}, ${2:true});$0",
 		],
 		"description": "assertEq function for tests"
+	},
+	"assertGe(1, 2)": {
+		"prefix": "asge",
+		"body": [
+			"assertGe(${1:true}, ${2:true});$0",
+		],
+		"description": "assertGe function for tests"
+	},
+	"assertLe(1, 2)": {
+		"prefix": "asle",
+		"body": [
+			"assertLe(${1:true}, ${2:true});$0",
+		],
+		"description": "assertLe function for tests"
 	},
 	"Send eth": {
 		"prefix": "callEth",
@@ -281,7 +329,7 @@
 			"// SPDX-License-Identifier: MIT",
 			"pragma solidity ^0.8.20;",
 			"",
-			"import {Test, console} from \"forge-std/Test.sol\";",
+			"import \"forge-std/Test.sol\";",
 			"",
 			"contract ${1:contract}Test is Test {",
 			"    function setUp() public {$0}",
@@ -295,7 +343,7 @@
 			"// SPDX-License-Identifier: MIT",
 			"pragma solidity ^0.8.20;",
 			"",
-			"import {Script, console} from \"forge-std/Script.sol\";",
+			"import \"forge-std/Script.sol\";",
 			"",
 			"contract ${1:contract}Deployer is Script {",
 			"    function run() public {$0}",
@@ -314,6 +362,15 @@
 		"prefix": "blocknumber",
 		"body": [
 			"block.number$0"
+		],
+		"description": "Writes \"block.number\""
+	},
+	"for loop": {
+		"prefix": "forloop",
+		"body": [
+			"for (uint ${1:i} = 0; ${1:i} < ${2:maxValue}; ${1:i}++) {",
+			"    $0",
+			"}"
 		],
 		"description": "Writes \"block.number\""
 	}
