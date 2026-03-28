@@ -373,5 +373,44 @@
 			"}"
 		],
 		"description": "Writes \"block.number\""
-	}
+	},
+	/**
+	* Foundry commands
+	*/
+	"forge selectors collision": {
+		"prefix": "foundryforgeselectorscollision",
+		"body": [
+			"forge selectors collision ${1:src/File1.sol:Contract1} ${2:src/File2.sol:Contract2}",
+			"forge selectors list"
+		],
+		"description": "List selectors or check for potential collisions between contracts"
+	},
+	"cast sig": {
+		"prefix": "foundrycastsig",
+		"body": [
+			"cast sig \"transfer(address,uint256)\""
+		],
+		"description": "Generate a function signature"
+	},
+	"cast from-utf8 to decimals": {
+		"prefix": "foundrycastfromutf8",
+		"body": [
+			"cast from-utf8 \"text\""
+		],
+		"description": "Convert from UTF8 text to Hexadecimal"
+	},
+	"cast to-bytes32": {
+		"prefix": "foundrycasttobytes32",
+		"body": [
+			"cast to-bytes32 ${1:0x123}"
+		],
+		"description": "Right-pads hex data to 32 bytes"
+	},
+	"cast to-base": {
+		"prefix": "foundrycasttobytes32",
+		"body": [
+			"cast to-base ${1:number} ${2:base}"
+		],
+		"description": "Convert a number from one base to another"
+	},
 }
